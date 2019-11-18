@@ -1,9 +1,52 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Favorite food" value="Sushi">
-    </mat-form-field>
-  
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Leave a comment"></textarea>
-    </mat-form-field>
-  </form>
+
+<div class="container">
+    <form [formGroup]="MyForm">
+        <h1>Project Work Azienda 1</h1> 
+
+        <mat-form-field class="input">
+            <input matInput formControlName="description" placeholder="Descrizione intervento" autocomplete="off">
+        </mat-form-field>
+    
+        <mat-form-field class="input">
+            <textarea matInput formControlName="detail" placeholder="Dettagli" autocomplete="off"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="dp" placeholder="Data e ora" formControlName="date" autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field> 
+
+        <mat-form-field id="time">
+            <input matInput type="time" autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field class="input">
+            <input 
+                matInput 
+                formControlName="price"
+                placeholder="Costo"
+                #price
+                autocomplete="off"
+                (input)="price_ValidatePrice(price)"
+                (keyup)="price_KeyUpPrice(price)"
+                (focus)="price_KeyUpPrice(price)"
+                (click)="price_KeyUpPrice(price)"
+            >
+        </mat-form-field>
+    
+        <mat-form-field class="input">
+            <mat-select placeholder="Manutentore" formControlName="worker" autocomplete="off" spellcheck="off">
+                <mat-option value="option">Option</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
+
+<div>
+    Validation status:
+    <div>- Description: {{MyForm.get('description').valid}}</div>
+    <div>- Detail: {{MyForm.get('detail').valid}}</div>
+    <div>- Price: {{MyForm.get('price').valid}}</div>
+    <div>- Worker: {{MyForm.get('worker').valid}}</div>
+</div>
