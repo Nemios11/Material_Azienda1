@@ -1,5 +1,10 @@
 <div class="sfondo">
-    <app-rolling *ngFor="5"></app-rolling>
+    <app-rolling></app-rolling>
+    <app-rolling></app-rolling>
+    <app-rolling></app-rolling>
+    <app-rolling></app-rolling>
+    <app-rolling></app-rolling>
+    
 
     <div class="container" #container (window:resize)="onResize(container)">
         <form [formGroup]="MyForm" (ngSubmit)="onSubmit()">
