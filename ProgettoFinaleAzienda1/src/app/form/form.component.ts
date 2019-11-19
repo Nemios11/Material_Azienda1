@@ -75,7 +75,6 @@ export class FormComponent implements OnInit {
 
   onSubmit()
   {
-    console.log(this.MyForm);
     this.workerService.postData(this.DatiForm);
   }
 
