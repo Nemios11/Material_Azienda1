@@ -1,0 +1,35 @@
+
+#stone {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 255, 255);
+
+    position: fixed;
+    left: 0px;
+    top: 0px;
+
+    opacity: 0.3;
+
+    animation: bubble 5s ease-out infinite;
+}
+
+@keyframes bubble {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scaleY(1.1) scaleX(0.9);
+    }
+    50% {
+      transform: scale(1);
+    }
+    75% {
+      transform: scaleY(0.9) scaleX(1.1);
+    }
+    97%, 100% {
+      transform: scale(1);
+    }
+  }
+

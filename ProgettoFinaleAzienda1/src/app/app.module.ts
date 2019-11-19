@@ -13,13 +13,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { MatAutocompleteModule } from "@angular/material";
 import { MatButtonModule } from '@angular/material/button';
+import { RollingComponent } from './rolling/rolling.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent
+    FormComponent,
+    RollingComponent
   ],
   imports: [
     BrowserModule,
