@@ -36,14 +36,14 @@
                 <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.dettaglio || '').length}} di {{constants.maxDetail}} caratteri massimo)</mat-hint>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="datetime">
                 <input matInput [matDatepicker]="dp" placeholder="Data e ora*" formControlName="date" autocomplete="off" [readonly]="workerService.iLastPostResponse == 0">
                 <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
                 <mat-datepicker #dp></mat-datepicker>
                 <mat-error>Necessaria data futura</mat-error>
             </mat-form-field> 
 
-            <mat-form-field id="time">
+            <mat-form-field id="time" class="datetime">
                 <input matInput type="time" autocomplete="off" formControlName="time" [readonly]="workerService.iLastPostResponse == 0">
                 <mat-icon matSuffix>alarm</mat-icon>
             </mat-form-field>
