@@ -19,6 +19,7 @@
                     (input)="DatiForm.description = MyForm.get('description').value"
                     [readonly]="workerService.iLastPostResponse == 0"
                 >
+                <mat-icon matSuffix>subject</mat-icon>
                 <mat-hint>Massimo {{constants.maxDescription}} caratteri</mat-hint>
                 <mat-error>Campo necessario</mat-error>
             </mat-form-field>
