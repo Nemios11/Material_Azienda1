@@ -30,6 +30,7 @@
                     (input)="DatiForm.dettaglio = MyForm.get('detail').value"
                     [readonly]="workerService.iLastPostResponse == 0"
                 ></textarea>
+                <mat-icon matSuffix>comment</mat-icon>
                 <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.dettaglio || '').length}} di {{constants.maxDetail}} caratteri massimo)</mat-hint>
             </mat-form-field>
 
