@@ -1,10 +1,29 @@
+.sfondo{
+    display: block;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../sfondo_aula.jpg');
+    background-size: 100% 100%;
+}
+
 .container{
     min-width: 150px;
     max-width: 500px;
     width: 100%;
     margin: auto;
 
-    background-color: rgba(230, 230, 230, 255);
+    border-radius: 50px;
+
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    background-color: rgba(255, 255, 255, 255);
+    z-index: 9999;
   }
   
 .input{

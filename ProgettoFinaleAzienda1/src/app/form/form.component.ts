@@ -56,6 +56,16 @@ export class FormComponent implements OnInit {
     });
   }
 
+  onSubmit()
+  {
+    this.workerService.postData(this.DatiForm);
+  }
+
+  resetFormData()
+  {
+    this.DatiForm.dettaglio = '';
+  }
+
   price_KeyUpPrice(val :any)
   {
     //Record some data: we're going to need it to handle chars being deleted
@@ -275,7 +285,7 @@ export class FormComponent implements OnInit {
       aOption: any[],
       aResult: any[] = [],
       aList: any[] = this.workerService.getList(),
-      sTxt: string = (this.MyForm.get('worker').value).toLowerCase(); 
+      sTxt: string = (this.MyForm.get('worker').value || '').toLowerCase(); 
 
     for (aOption of aList)
     {

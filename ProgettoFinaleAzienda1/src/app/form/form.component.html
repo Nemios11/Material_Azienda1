@@ -1,90 +1,92 @@
-<div class="container">
-    <form [formGroup]="MyForm">
-        <h1>Project Work Azienda 1</h1> 
+<div class="sfondo">
+    <div class="container">
+        <form [formGroup]="MyForm" (ngSubmit)="onSubmit()">
+            <h1>Project Work Azienda 1</h1> 
 
-        <mat-form-field class="input">
-            <input
-                matInput
-                formControlName="description"
-                placeholder="Descrizione intervento*"
-                autocomplete="off"
-                maxlength="{{constants.maxDescription}}"
-                (input)="DatiForm.description = MyForm.get('description').value"
-            >
-            <mat-hint>Massimo {{constants.maxDescription}} caratteri</mat-hint>
-        </mat-form-field>
-    
-        <mat-form-field class="input">
-            <textarea
-                matInput
-                formControlName="detail"
-                placeholder="Dettagli"
-                autocomplete="off"
-                maxlength="{{constants.maxDetail}}"
-                (input)="DatiForm.detail = MyForm.get('detail').value"
-            ></textarea>
-            <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.detail || '').length}} di {{constants.maxDetail}} caratteri massimo)</mat-hint>
-        </mat-form-field>
-
-        <mat-form-field>
-            <input matInput [matDatepicker]="dp" placeholder="Data e ora*" formControlName="date" autocomplete="off">
-            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker #dp></mat-datepicker>
-        </mat-form-field> 
-
-        <mat-form-field id="time">
-            <input matInput type="time" autocomplete="off" formControlName="time">
-        </mat-form-field>
-
-        <mat-form-field class="input">
-            <input 
-                matInput 
-                formControlName="price"
-                placeholder="Costo*"
-                #price
-                autocomplete="off"
-                (input)="price_ValidatePrice(price)"
-                (keyup)="price_KeyUpPrice(price)"
-                (focus)="price_KeyUpPrice(price)"
-                (click)="price_KeyUpPrice(price)"
-            >
-        </mat-form-field>
-
-        <mat-form-field class="input">
-            <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let option of getFilteredList()" [value]="option[0]">
-                {{option[0]}}
-              </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+            <mat-form-field class="input">
+                <input
+                    matInput
+                    formControlName="description"
+                    placeholder="Descrizione intervento*"
+                    autocomplete="off"
+                    maxlength="{{constants.maxDescription}}"
+                    (input)="DatiForm.description = MyForm.get('description').value"
+                >
+                <mat-hint>Massimo {{constants.maxDescription}} caratteri</mat-hint>
+            </mat-form-field>
         
-        <div class="note">
-            I campi contrassegnati con * sono necessari.
-        </div>
-        <div class="bottoni">
-            <button class="invia" mat-raised-button color="primary">Invia</button>
-            <button class="cancella" mat-raised-button color="accent">Cancella</button>
-        </div>
+            <mat-form-field class="input">
+                <textarea
+                    matInput
+                    formControlName="detail"
+                    placeholder="Dettagli"
+                    autocomplete="off"
+                    maxlength="{{constants.maxDetail}}"
+                    (input)="DatiForm.dettaglio = MyForm.get('detail').value"
+                ></textarea>
+                <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.dettaglio || '').length}} di {{constants.maxDetail}} caratteri massimo)</mat-hint>
+            </mat-form-field>
 
+            <mat-form-field>
+                <input matInput [matDatepicker]="dp" placeholder="Data e ora*" formControlName="date" autocomplete="off">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field> 
 
-    </form>
-</div>
+            <mat-form-field id="time">
+                <input matInput type="time" autocomplete="off" formControlName="time">
+            </mat-form-field>
 
+            <mat-form-field class="input">
+                <input 
+                    matInput 
+                    formControlName="price"
+                    placeholder="Costo*"
+                    #price
+                    autocomplete="off"
+                    (input)="price_ValidatePrice(price)"
+                    (keyup)="price_KeyUpPrice(price)"
+                    (focus)="price_KeyUpPrice(price)"
+                    (click)="price_KeyUpPrice(price)"
+                >
+            </mat-form-field>
 
-<div>
-    Validation status:
-    <div>- Description: {{MyForm.get('description').valid}}</div>
-    <div>- Detail: {{MyForm.get('detail').valid}}</div>
-    <div>- Data: {{MyForm.get('date').valid}}</div>
-    <div>- Ora: {{MyForm.get('time').valid}}</div>
-    <div>- Price: {{MyForm.get('price').valid}}</div>
-    <div>- Worker: {{MyForm.get('worker').valid}}</div>
-    <div></div>
-    Data collected:
-    <div>- Description: {{DatiForm.description}}</div>
-    <div>- Detail: {{DatiForm.detail}}</div>
-    <div>- Data: {{DatiForm.date}}</div>
-    <div>- Price: {{DatiForm.price}}</div>
-    <div>- Worker: {{DatiForm.worker_id}}</div>
+            <mat-form-field class="input">
+                <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of getFilteredList()" [value]="option[0]">
+                    {{option[0]}}
+                </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            
+            <div class="note">
+                I campi contrassegnati con * sono necessari.
+            </div>
+
+            <div class="bottoni">
+                <button type="submit" class="invia" mat-raised-button color="primary">Invia</button>
+                <button type="reset" (click)="resetFormData()" class="cancella" mat-raised-button color="accent">Cancella</button>
+            </div>
+        </form>
+    </div>
+
+    <!--
+    <div>
+        Validation status:
+        <div>- Description: {{MyForm.get('description').valid}}</div>
+        <div>- Detail: {{MyForm.get('detail').valid}}</div>
+        <div>- Data: {{MyForm.get('date').valid}}</div>
+        <div>- Ora: {{MyForm.get('time').valid}}</div>
+        <div>- Price: {{MyForm.get('price').valid}}</div>
+        <div>- Worker: {{MyForm.get('worker').valid}}</div>
+        <div></div>
+        Data collected:
+        <div>- Description: {{DatiForm.description}}</div>
+        <div>- Detail: {{DatiForm.dettaglio}}</div>
+        <div>- Data: {{DatiForm.date}}</div>
+        <div>- Price: {{DatiForm.price}}</div>
+        <div>- Worker: {{DatiForm.worker_id}}</div>
+    </div>
+    -->
 </div>
