@@ -4,9 +4,7 @@
     width: 100%;
     margin: auto;
 
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0);
+    background-color: rgba(230, 230, 230, 255);
   }
   
 .input{
@@ -19,4 +17,36 @@ h1{
 
 #time{
     margin-left: 12px;
+}
+
+mat-form-field{
+    margin-bottom: 30px;
+}
+
+.note{
+
+    font-size: smaller;
+    font-family:  'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgba(150, 150, 150, 255);
+    margin-bottom: 5px;
+
+}
+
+.bottoni{
+
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+.invia{
+
+    width: 40%;
+}
+
+.cancella{
+
+    margin-left: 20%;
+    width: 40%;
 }

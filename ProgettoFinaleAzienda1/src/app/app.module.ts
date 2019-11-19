@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { MatAutocompleteModule } from "@angular/material";
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -30,7 +31,8 @@ import { MatAutocompleteModule } from "@angular/material";
     ReactiveFormsModule,
     MatDatepickerModule,
     HttpClientModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

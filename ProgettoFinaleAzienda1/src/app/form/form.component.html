@@ -1,4 +1,3 @@
-
 <div class="container">
     <form [formGroup]="MyForm">
         <h1>Project Work Azienda 1</h1> 
@@ -7,7 +6,7 @@
             <input
                 matInput
                 formControlName="description"
-                placeholder="Descrizione intervento"
+                placeholder="Descrizione intervento*"
                 autocomplete="off"
                 maxlength="{{constants.maxDescription}}"
                 (input)="DatiForm.description = MyForm.get('description').value"
@@ -28,7 +27,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="dp" placeholder="Data e ora" formControlName="date" autocomplete="off">
+            <input matInput [matDatepicker]="dp" placeholder="Data e ora*" formControlName="date" autocomplete="off">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
         </mat-form-field> 
@@ -41,7 +40,7 @@
             <input 
                 matInput 
                 formControlName="price"
-                placeholder="Costo"
+                placeholder="Costo*"
                 #price
                 autocomplete="off"
                 (input)="price_ValidatePrice(price)"
@@ -52,15 +51,26 @@
         </mat-form-field>
 
         <mat-form-field class="input">
-            <input type="text" placeholder="Manutentore" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">
+            <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
               <mat-option *ngFor="let option of getFilteredList()" [value]="option[0]">
                 {{option[0]}}
               </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+        
+        <div class="note">
+            I campi contrassegnati con * sono necessari.
+        </div>
+        <div class="bottoni">
+            <button class="invia" mat-raised-button color="primary">Invia</button>
+            <button class="cancella" mat-raised-button color="accent">Cancella</button>
+        </div>
+
+
     </form>
 </div>
+
 
 <div>
     Validation status:
