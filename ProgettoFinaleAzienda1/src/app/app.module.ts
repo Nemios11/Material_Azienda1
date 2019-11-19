@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule } from "@angular/material";
+
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    HttpClientModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,7 +24,7 @@
                 maxlength="{{constants.maxDetail}}"
                 (input)="DatiForm.detail = MyForm.get('detail').value"
             ></textarea>
-            <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.detail || '').length}} di {{constants.maxDetail}} caratteri massimo</mat-hint>
+            <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.detail || '').length}} di {{constants.maxDetail}} caratteri massimo)</mat-hint>
         </mat-form-field>
 
         <mat-form-field>
@@ -50,11 +50,30 @@
                 (click)="price_KeyUpPrice(price)"
             >
         </mat-form-field>
-    
+    <!--
         <mat-form-field class="input">
-            <mat-select placeholder="Manutentore" formControlName="worker" autocomplete="off" spellcheck="off">
-                <mat-option value="option">Option</mat-option>
-            </mat-select>
+            <input
+                type="text"
+                placeholder="Manutentore"
+                formControlName="worker"
+                autocomplete="off"
+                spellcheck="off"
+                matInput
+                [matAutocomplete] ="auto"
+            >
+            <mat-autocomplete #auto="matAutcomplete">
+                <mat-option value="option" *ngFor="let persona of ms.getList()">{{persona[0]}}</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    -->
+
+        <mat-form-field class="input">
+            <input type="text" placeholder="Manutentore" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of ms.getList()" [value]="option[0]">
+                {{option[0]}}
+              </mat-option>
+            </mat-autocomplete>
         </mat-form-field>
     </form>
 </div>
