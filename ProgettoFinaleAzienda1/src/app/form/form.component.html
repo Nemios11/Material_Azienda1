@@ -45,6 +45,7 @@
 
             <mat-form-field id="time">
                 <input matInput type="time" autocomplete="off" formControlName="time" [readonly]="workerService.iLastPostResponse == 0">
+                <mat-icon matSuffix>alarm</mat-icon>
             </mat-form-field>
 
             
@@ -63,7 +64,7 @@
                     [readonly]="workerService.iLastPostResponse == 0"
                 >
                 <mat-error>Campo necessario</mat-error>
-                <mat-icon matSuffix>explore</mat-icon>
+                <mat-icon matSuffix>euro_symbol</mat-icon>
             </mat-form-field>
             
 
@@ -76,6 +77,7 @@
                 </mat-autocomplete>
 
                 <mat-error *ngIf="MyForm.get('worker').errors">{{MyForm.get('worker').errors.error}}</mat-error>
+                <mat-icon matSuffix>face</mat-icon>
             </mat-form-field>
             
             <div class="note">
