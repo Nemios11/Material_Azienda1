@@ -6,7 +6,7 @@ import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { WorkerService } from "../http.service";
 
 
@@ -21,7 +21,7 @@ import { WorkerService } from "../http.service";
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ]
 })
 export class FormComponent implements OnInit {
@@ -305,22 +305,29 @@ export class FormComponent implements OnInit {
     if (this.MyForm)
     {
       var
-        valueDatalocal: string = this.MyForm.get('date').value+'T'+this.MyForm.get('time').value,
+        dateWTF: any = new Date(this.MyForm.get('date').value),
+        valueDatalocal: string = dateWTF.getFullYear()+'-'+(dateWTF.getMonth()+1)+'-'+dateWTF.getDate()+'T'+this.MyForm.get('time').value,
         datetoday: any = new Date(),
-        dateinput: any = new Date(valueDatalocal) ;
+        dateinput: any = new Date(valueDatalocal);
 
       if (dateinput >= datetoday){
-        this.DatiForm.date = valueDatalocal;
+        this.DatiForm.date = valueDatalocal+':00';
+
+        //We need to set both forms as valid! Also, no need to check for PW1_form: it wouldn't be valid otherwise
+        this.MyForm.get('date').setErrors(null);
+        this.MyForm.get('time').setErrors(null);
+
         return null;
 
       } else { 
-          return {
-            'error': "Assegna una data valida!"
-          }    
+
+        this.MyForm.get('date').setErrors({'error': "Assegna una data valida!"});
+        this.MyForm.get('time').setErrors({'error': "Assegna una data valida!"});
+
+        return {'error': "Assegna una data valida!"};    
       }   
     }else
     {
-      console.log('k');
       return {
         'error': "Form non pronto"
       } 
