@@ -35,6 +35,7 @@ export class WorkerService {
         this.getHeader()            
       ).subscribe(
         (res: any) => {
+          console.log('Dati lavoratori:');
           console.log(res);
           for (var i = 0; i < res.data.length; i++)
           {
