@@ -70,7 +70,7 @@
         <mat-form-field class="input">
             <input type="text" placeholder="Manutentore" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let option of ms.getList()" [value]="option[0]">
+              <mat-option *ngFor="let option of getFilteredList()" [value]="option[0]">
                 {{option[0]}}
               </mat-option>
             </mat-autocomplete>

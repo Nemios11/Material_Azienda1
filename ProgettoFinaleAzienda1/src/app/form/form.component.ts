@@ -7,7 +7,7 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import { HttpService } from "../http.service";
+import { WorkerService } from "../http.service";
 
 
 @Component({
@@ -43,7 +43,7 @@ export class FormComponent implements OnInit {
   bPrice_WasDecChar_RightCaretSide: boolean;
   iPrice_LastCaretPos: number;
 
-  constructor(private builder: FormBuilder, private _adapter: DateAdapter<any>, private ms: HttpService) { }
+  constructor(private builder: FormBuilder, private _adapter: DateAdapter<any>, private workerService: WorkerService) { }
 
   ngOnInit() {
     this.MyForm = this.builder.group({
@@ -267,6 +267,25 @@ export class FormComponent implements OnInit {
       }
       */
     }
+  }
+
+  getFilteredList()
+  {
+    var 
+      aOption: any[],
+      aResult: any[] = [],
+      aList: any[] = this.workerService.getList(),
+      sTxt: string = (this.MyForm.get('worker').value).toLowerCase(); 
+
+    for (aOption of aList)
+    {
+      if ((aOption[0].toLowerCase()).includes(sTxt))
+      {
+        aResult.push(aOption);
+      }
+    }
+
+    return aResult;
   }
 
 }

@@ -6,7 +6,7 @@ import { DatiIntervento } from './dati-intervento';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class WorkerService {
 
   results: any[];
   private apiUrlget = 'https://reqres.in/api/users?per_page=100';
