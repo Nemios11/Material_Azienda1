@@ -12,6 +12,8 @@ export class WorkerService {
   private apiUrlget = 'https://reqres.in/api/users?per_page=100';
   private apiUrlpost = 'https://reqres.in/api/users';
 
+  iLastPostResponse: number = -1; //-1: not sent, 0: sending, 1: success, 2: failure
+
   constructor(private AppService: HttpClient ) { }
 
   getHeader()
@@ -51,15 +53,21 @@ export class WorkerService {
   {
     console.log('Dati da inviare:');
     console.log(data);
+
+    this.iLastPostResponse = 0; //Sending
     
     this.AppService.post(this.apiUrlpost, data).subscribe(
       (res: any)=>{
-      console.log('Dati inviati correttamente:');
-      console.log(res);
+        console.log('Dati inviati correttamente:');
+        console.log(res);
+
+        //this.iLastPostResponse = 1; //Success
       },
       (res: any)=>{
         console.log('Errore:');
         console.log(res);
+
+        this.iLastPostResponse = 2; //Failure
       }
     )
   }

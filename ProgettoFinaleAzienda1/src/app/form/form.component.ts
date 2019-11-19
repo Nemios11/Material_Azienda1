@@ -54,6 +54,23 @@ export class FormComponent implements OnInit {
       price: ['', (val: any) => {return ((((val.value || '').length > 0) && (val.value != '-'))? null : {'error': 'Il prezzo è necessario.'})}],
       worker:["", [(val:any) => {return this.validateWorker(val.value)}]]
     });
+
+    //Trigger the resize event, so that it will auto-center on init
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  onResize(divRef: any)
+  {
+    var
+      iHeight: number = (window.innerHeight-divRef.getBoundingClientRect().height)/2;
+
+    if (iHeight < 0)
+    {
+      divRef.style.marginTop = '0px';
+    }else
+    {
+      divRef.style.marginTop = iHeight+'px';
+    }
   }
 
   onSubmit()
@@ -301,6 +318,7 @@ export class FormComponent implements OnInit {
   validateWorker(sTxt: string){
     var
       aItem: any [];
+     
     for(aItem of this.workerService.getList())
     {
       if(sTxt == aItem[0]){
