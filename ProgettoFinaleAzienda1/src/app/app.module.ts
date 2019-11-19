@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatAutocompleteModule } from "@angular/material";
 import { MatButtonModule } from '@angular/material/button';
 import { RollingComponent } from './rolling/rolling.component';
-
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { RollingComponent } from './rolling/rolling.component';
     MatDatepickerModule,
     HttpClientModule,
     MatAutocompleteModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

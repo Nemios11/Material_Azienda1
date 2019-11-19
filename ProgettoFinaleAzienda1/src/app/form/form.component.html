@@ -19,6 +19,7 @@
                     (input)="DatiForm.description = MyForm.get('description').value"
                 >
                 <mat-hint>Massimo {{constants.maxDescription}} caratteri</mat-hint>
+                <mat-error>Campo obbligatorio</mat-error>
             </mat-form-field>
         
             <mat-form-field class="input">
@@ -43,6 +44,8 @@
                 <input matInput type="time" autocomplete="off" formControlName="time">
             </mat-form-field>
 
+            
+                
             <mat-form-field class="input">
                 <input 
                     matInput 
@@ -55,7 +58,9 @@
                     (focus)="price_KeyUpPrice(price)"
                     (click)="price_KeyUpPrice(price)"
                 >
+                <mat-icon matSuffix>explore</mat-icon>
             </mat-form-field>
+            
 
             <mat-form-field class="input">
                 <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">
