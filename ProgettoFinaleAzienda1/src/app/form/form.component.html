@@ -19,6 +19,7 @@
                     (input)="DatiForm.description = MyForm.get('description').value"
                     [readonly]="workerService.iLastPostResponse == 0"
                 >
+                <mat-icon matSuffix>subject</mat-icon>
                 <mat-hint>Massimo {{constants.maxDescription}} caratteri</mat-hint>
                 <mat-error>Campo necessario</mat-error>
             </mat-form-field>
@@ -88,6 +89,8 @@
                 <button type="submit" class="invia" mat-raised-button color="primary" [disabled]="(!MyForm.valid) || (workerService.iLastPostResponse == 0)">Invia</button>
                 <button type="reset" (click)="resetFormData()" class="cancella" mat-raised-button color="accent" [disabled]="workerService.iLastPostResponse == 0">Cancella</button>
             </div>
+
+            <mat-progress-bar mode="indeterminate" [style.opacity]="(workerService.iLastPostResponse == 0)? 1 : 0"></mat-progress-bar>
         </form>
     </div>
 

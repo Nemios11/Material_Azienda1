@@ -15,6 +15,8 @@ import { MatAutocompleteModule } from "@angular/material";
 import { MatButtonModule } from '@angular/material/button';
 import { RollingComponent } from './rolling/rolling.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     MatAutocompleteModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
