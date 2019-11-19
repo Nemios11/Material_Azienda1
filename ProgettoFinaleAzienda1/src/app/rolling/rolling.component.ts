@@ -20,6 +20,7 @@ export class RollingComponent implements OnInit {
 
   selfTransition_Top_Ended: boolean = true;
   selfTransition_Left_Ended: boolean = true;
+  selfCountFails: number = 0;
 
   selfTransition_Color: number = 2.0;
   selfTransition_Position: number = 2.0;
@@ -35,58 +36,10 @@ export class RollingComponent implements OnInit {
     everySecondSub = everySecond.subscribe((procs) => {
       this.setNewColor();
 
-      this.selfPos_CurrEdge = 1+this.randomQty(2);
-
-      switch(this.selfPos_CurrEdge)
-      {
-        case 0: //top; never happens, but still... it may be useful to have the complete roster around
-          this.selfPos_Curr = [
-            20+this.randomQty(this.getMaxPosX()-40),
-            0
-          ];
-          break;
-
-        case 1: //right
-          this.selfPos_Curr = [
-            this.getMaxPosX(),
-            20+this.randomQty(this.getMaxPosY()-40)
-          ];
-          break;
-
-        case 2: //bottom
-          this.selfPos_Curr = [
-            20+this.randomQty(this.getMaxPosX()-40),
-            this.getMaxPosY()
-          ];
-          break;
-
-        default: //left; never happens, but still... it may be useful to have the complete roster around
-          this.selfPos_Curr = [
-            0,
-            20+this.randomQty(this.getMaxPosY()-40)
-          ];
-          break;
-      }
+      this.setRandomPosition();
 
       //Unset this, as it won't be needed anymore
       everySecondSub.unsubscribe();
-
-      //And set the speed
-      var iDistance = (((this.selfPos_Prev[0]-this.selfPos_Curr[0])**2)+((this.selfPos_Prev[1]-this.selfPos_Curr[1])**2))**(1/2);
-
-      if (iDistance > 10)
-      {
-        this.selfTransition_Position = Math.round(10*iDistance/150)/10;
-        this.setTransition();
-
-        //Also, set the bools
-        this.selfTransition_Top_Ended = false;
-        this.selfTransition_Left_Ended = false;
-      }else
-      {
-        //Destination too close to be worth playing the animation; skip it
-        this.setNewPosition();
-      }
     });
   }
 
@@ -335,13 +288,23 @@ export class RollingComponent implements OnInit {
      this.selfTransition_Position = Math.round(10*iDistance/150)/10;
      this.setTransition();
 
-     //Also, set the bools
+     //Also, set the bools and counts
      this.selfTransition_Top_Ended = false;
      this.selfTransition_Left_Ended = false;
+     this.selfCountFails = 0;
+
    }else
    {
      //Destination too close to be worth playing the animation; skip it
-     this.setNewPosition();
+     if (this.selfCountFails < 10)
+     {
+      this.selfCountFails += 1;
+      this.setNewPosition();
+     }else
+     {
+      this.selfCountFails = 0;
+      this.setRandomPosition();
+     }
    }
  }
 
@@ -378,5 +341,62 @@ export class RollingComponent implements OnInit {
    this.selfBackColor[iID] = iNewVal;
 
    this.setTransition();
- }
+  }
+
+  setRandomPosition()
+  {
+    this.selfPos_CurrEdge = 1+this.randomQty(2);
+
+    switch(this.selfPos_CurrEdge)
+    {
+      case 0: //top; never happens, but still... it may be useful to have the complete roster around
+        this.selfPos_Curr = [
+          20+this.randomQty(this.getMaxPosX()-40),
+          0
+        ];
+        break;
+
+      case 1: //right
+        this.selfPos_Curr = [
+          this.getMaxPosX(),
+          20+this.randomQty(this.getMaxPosY()-40)
+        ];
+        break;
+
+      case 2: //bottom
+        this.selfPos_Curr = [
+          20+this.randomQty(this.getMaxPosX()-40),
+          this.getMaxPosY()
+        ];
+        break;
+
+      default: //left; never happens, but still... it may be useful to have the complete roster around
+        this.selfPos_Curr = [
+          0,
+          20+this.randomQty(this.getMaxPosY()-40)
+        ];
+        break;
+    }
+
+    //We haven't failed yet
+    this.selfCountFails = 0;
+
+    //And set the speed
+    var iDistance = (((this.selfPos_Prev[0]-this.selfPos_Curr[0])**2)+((this.selfPos_Prev[1]-this.selfPos_Curr[1])**2))**(1/2);
+
+    if (iDistance > 10)
+    {
+      this.selfTransition_Position = Math.round(10*iDistance/150)/10;
+      this.setTransition();
+
+      //Also, set the bools
+      this.selfTransition_Top_Ended = false;
+      this.selfTransition_Left_Ended = false;
+    }else
+    {
+      //Destination too close to be worth playing the animation; skip it
+      this.setNewPosition();
+    }
+  }
+
 }
