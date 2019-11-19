@@ -33,9 +33,12 @@ export class FormComponent implements OnInit {
   //Constants
   constants = {
     maxDescription: 25,
-    maxDetail: 100
+    maxDetail: 100,
+    numStones: 5
   }
 
+  //Rolling balls!
+  aArrayStones: number[] = [];
   
   //Required for the price field
   bPrice_WasThousChar_LeftCaretSide: boolean;
@@ -58,6 +61,14 @@ export class FormComponent implements OnInit {
 
     //Trigger the resize event, so that it will auto-center on init
     window.dispatchEvent(new Event('resize'));
+
+    //Create bubbles
+    var
+      i: number;
+    for (i = 0; i < this.constants.numStones; i++)
+    {
+      this.aArrayStones.push(0);
+    }
   }
 
   onResize(divRef: any)
