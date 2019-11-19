@@ -24,7 +24,7 @@ export class RollingComponent implements OnInit {
 
   selfTransition_Color: number = 2.0;
   selfTransition_Position: number = 2.0;
-  selfTransitionString: string = 'all 2.0s linear 0s';
+  selfTransitionString: string = 'all 0.0s linear 0s';
 
   constructor() { }
 
@@ -36,11 +36,47 @@ export class RollingComponent implements OnInit {
     everySecondSub = everySecond.subscribe((procs) => {
       this.setNewColor();
 
+      //Set a random first destination
       this.setRandomPosition();
 
       //Unset this, as it won't be needed anymore
       everySecondSub.unsubscribe();
     });
+
+    //Set a random starting point
+    this.selfBackColor = [this.randomQty(256), this.randomQty(256), this.randomQty(256)];
+      
+    this.selfPos_CurrEdge = this.randomQty(4);
+    switch(this.selfPos_CurrEdge)
+    {
+    case 0: //top; never happens, but still... it may be useful to have the complete roster around
+      this.selfPos_Curr = [
+        20+this.randomQty(this.getMaxPosX()-40),
+        0
+      ];
+      break;
+
+    case 1: //right
+      this.selfPos_Curr = [
+        this.getMaxPosX(),
+        20+this.randomQty(this.getMaxPosY()-40)
+      ];
+      break;
+
+    case 2: //bottom
+      this.selfPos_Curr = [
+        20+this.randomQty(this.getMaxPosX()-40),
+        this.getMaxPosY()
+      ];
+      break;
+
+    default: //left; never happens, but still... it may be useful to have the complete roster around
+      this.selfPos_Curr = [
+        0,
+        20+this.randomQty(this.getMaxPosY()-40)
+      ];
+      break;
+    }
   }
 
   getColor(): string
@@ -345,7 +381,14 @@ export class RollingComponent implements OnInit {
 
   setRandomPosition()
   {
-    this.selfPos_CurrEdge = 1+this.randomQty(2);
+    this.selfPos_CurrEdge = this.selfPos_CurrEdge+1+this.randomQty(3); //Min +1, max +3
+    if (this.selfPos_CurrEdge > 3)
+    {
+      this.selfPos_CurrEdge -= 4;
+    }
+
+    //Save the old current position
+    this.selfPos_Prev = [this.selfPos_Curr[0], this.selfPos_Curr[1]];
 
     switch(this.selfPos_CurrEdge)
     {
