@@ -47,6 +47,8 @@
                 <input matInput type="time" autocomplete="off" formControlName="time" [readonly]="workerService.iLastPostResponse == 0">
             </mat-form-field>
 
+            
+                
             <mat-form-field class="input">
                 <input 
                     matInput 
@@ -61,7 +63,9 @@
                     [readonly]="workerService.iLastPostResponse == 0"
                 >
                 <mat-error>Campo necessario</mat-error>
+                <mat-icon matSuffix>explore</mat-icon>
             </mat-form-field>
+            
 
             <mat-form-field class="input">
                 <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" [readonly]="workerService.iLastPostResponse == 0">

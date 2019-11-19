@@ -20,8 +20,12 @@
 
     padding-left: 100px;
     padding-right: 100px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    margin-top: 40px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
 
     margin-top: 40px;
     border-width: 1px;
@@ -38,6 +42,7 @@
 
 h1{
     text-align: center;
+    
 }
 
 #time{
