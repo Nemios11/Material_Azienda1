@@ -25,9 +25,17 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 })
 export class FormComponent implements OnInit {
 
+  //Form data
   MyForm: FormGroup;
   DatiForm: DatiIntervento = new DatiIntervento();
 
+  //Constants
+  constants = {
+    maxDescription: 25,
+    maxDetail: 100
+  }
+
+  //Required for the price field
   bPrice_WasThousChar_LeftCaretSide: boolean;
   bPrice_WasDecChar_LeftCaretSide: boolean;
   bPrice_WasThousChar_RightCaretSide: boolean;
@@ -209,7 +217,7 @@ export class FormComponent implements OnInit {
             //Adjust the caret if needed
             if (iCaret > (sResult.length+i))
             {
-              iTemp +=1;
+              iTemp += sThousandChar.length;
             }
           }
           sTemp = aArr[0][i]+sTemp;

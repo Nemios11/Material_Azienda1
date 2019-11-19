@@ -4,11 +4,27 @@
         <h1>Project Work Azienda 1</h1> 
 
         <mat-form-field class="input">
-            <input matInput formControlName="description" placeholder="Descrizione intervento" autocomplete="off">
+            <input
+                matInput
+                formControlName="description"
+                placeholder="Descrizione intervento"
+                autocomplete="off"
+                maxlength="{{constants.maxDescription}}"
+                (input)="DatiForm.description = MyForm.get('description').value"
+            >
+            <mat-hint>Massimo {{constants.maxDescription}} caratteri</mat-hint>
         </mat-form-field>
     
         <mat-form-field class="input">
-            <textarea matInput formControlName="detail" placeholder="Dettagli" autocomplete="off"></textarea>
+            <textarea
+                matInput
+                formControlName="detail"
+                placeholder="Dettagli"
+                autocomplete="off"
+                maxlength="{{constants.maxDetail}}"
+                (input)="DatiForm.detail = MyForm.get('detail').value"
+            ></textarea>
+            <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.detail || '').length}} di {{constants.maxDetail}} caratteri massimo</mat-hint>
         </mat-form-field>
 
         <mat-form-field>
@@ -49,4 +65,10 @@
     <div>- Detail: {{MyForm.get('detail').valid}}</div>
     <div>- Price: {{MyForm.get('price').valid}}</div>
     <div>- Worker: {{MyForm.get('worker').valid}}</div>
+    <div></div>
+    Data collected:
+    <div>- Description: {{DatiForm.description}}</div>
+    <div>- Detail: {{DatiForm.detail}}</div>
+    <div>- Price: {{DatiForm.price}}</div>
+    <div>- Worker: {{DatiForm.worker_id}}</div>
 </div>
