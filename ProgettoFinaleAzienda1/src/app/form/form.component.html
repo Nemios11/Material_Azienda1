@@ -5,7 +5,7 @@
     <app-rolling></app-rolling>
     <app-rolling></app-rolling>
 
-    <div class="container">
+    <div class="container" #container (window:resize)="onResize(container)">
         <form [formGroup]="MyForm" (ngSubmit)="onSubmit()">
             <h1>Project Work Azienda 1</h1> 
 
@@ -17,8 +17,10 @@
                     autocomplete="off"
                     maxlength="{{constants.maxDescription}}"
                     (input)="DatiForm.description = MyForm.get('description').value"
+                    [readonly]="workerService.iLastPostResponse == 0"
                 >
                 <mat-hint>Massimo {{constants.maxDescription}} caratteri</mat-hint>
+                <mat-error>Campo necessario</mat-error>
             </mat-form-field>
         
             <mat-form-field class="input">
@@ -29,20 +31,24 @@
                     autocomplete="off"
                     maxlength="{{constants.maxDetail}}"
                     (input)="DatiForm.dettaglio = MyForm.get('detail').value"
+                    [readonly]="workerService.iLastPostResponse == 0"
                 ></textarea>
                 <mat-hint>(disponibili {{constants.maxDetail - (DatiForm.dettaglio || '').length}} di {{constants.maxDetail}} caratteri massimo)</mat-hint>
             </mat-form-field>
 
-            <mat-form-field>
-                <input matInput [matDatepicker]="dp" placeholder="Data e ora*" formControlName="date" autocomplete="off">
+            <mat-form-field class="datetime">
+                <input matInput [matDatepicker]="dp" placeholder="Data e ora*" formControlName="date" autocomplete="off" [readonly]="workerService.iLastPostResponse == 0">
                 <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
                 <mat-datepicker #dp></mat-datepicker>
+                <mat-error>Necessaria data futura</mat-error>
             </mat-form-field> 
 
-            <mat-form-field id="time">
-                <input matInput type="time" autocomplete="off" formControlName="time">
+            <mat-form-field id="time" class="datetime">
+                <input matInput type="time" autocomplete="off" formControlName="time" [readonly]="workerService.iLastPostResponse == 0">
             </mat-form-field>
 
+            
+                
             <mat-form-field class="input">
                 <input 
                     matInput 
@@ -54,16 +60,22 @@
                     (keyup)="price_KeyUpPrice(price)"
                     (focus)="price_KeyUpPrice(price)"
                     (click)="price_KeyUpPrice(price)"
+                    [readonly]="workerService.iLastPostResponse == 0"
                 >
+                <mat-error>Campo necessario</mat-error>
+                <mat-icon matSuffix>euro_symbol</mat-icon>
             </mat-form-field>
+            
 
             <mat-form-field class="input">
-                <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">
+                <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" [readonly]="workerService.iLastPostResponse == 0">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let option of getFilteredList()" [value]="option[0]">
                     {{option[0]}}
                 </mat-option>
                 </mat-autocomplete>
+
+                <mat-error *ngIf="MyForm.get('worker').errors">{{MyForm.get('worker').errors.error}}</mat-error>
             </mat-form-field>
             
             <div class="note">
@@ -71,8 +83,8 @@
             </div>
 
             <div class="bottoni">
-                <button type="submit" class="invia" mat-raised-button color="primary">Invia</button>
-                <button type="reset" (click)="resetFormData()" class="cancella" mat-raised-button color="accent">Cancella</button>
+                <button type="submit" class="invia" mat-raised-button color="primary" [disabled]="(!MyForm.valid) || (workerService.iLastPostResponse == 0)">Invia</button>
+                <button type="reset" (click)="resetFormData()" class="cancella" mat-raised-button color="accent" [disabled]="workerService.iLastPostResponse == 0">Cancella</button>
             </div>
         </form>
     </div>

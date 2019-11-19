@@ -45,7 +45,7 @@ export class RollingComponent implements OnInit {
 
   getColor(): string
   {
-    return ('rgba('+this.selfBackColor[0]+', '+this.selfBackColor[1]+', '+this.selfBackColor[2]+', 255)');
+    return ('rgba('+this.selfBackColor[0]+', '+this.selfBackColor[1]+', '+this.selfBackColor[2]+', 1)');
   }
   getPos(value: number): string
   {
