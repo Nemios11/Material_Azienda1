@@ -36,6 +36,7 @@ export class FormComponent implements OnInit {
     maxDetail: 100
   }
 
+  
   //Required for the price field
   bPrice_WasThousChar_LeftCaretSide: boolean;
   bPrice_WasDecChar_LeftCaretSide: boolean;
