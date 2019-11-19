@@ -46,11 +46,16 @@ h1{
 }
 
 #time{
-    margin-left: 12px;
+    margin-left: 2%;
 }
 
 mat-form-field{
     margin-bottom: 30px;
+}
+
+.datetime
+{
+    width: 49%;
 }
 
 .note{
