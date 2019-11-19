@@ -61,7 +61,7 @@ export class WorkerService {
         console.log('Dati inviati correttamente:');
         console.log(res);
 
-        //this.iLastPostResponse = 1; //Success
+        this.iLastPostResponse = 1; //Success
       },
       (res: any)=>{
         console.log('Errore:');
