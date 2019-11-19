@@ -34,7 +34,7 @@
         </mat-form-field> 
 
         <mat-form-field id="time">
-            <input matInput type="time" autocomplete="off">
+            <input matInput type="time" autocomplete="off" formControlName="time">
         </mat-form-field>
 
         <mat-form-field class="input">
@@ -50,25 +50,9 @@
                 (click)="price_KeyUpPrice(price)"
             >
         </mat-form-field>
-    <!--
-        <mat-form-field class="input">
-            <input
-                type="text"
-                placeholder="Manutentore"
-                formControlName="worker"
-                autocomplete="off"
-                spellcheck="off"
-                matInput
-                [matAutocomplete] ="auto"
-            >
-            <mat-autocomplete #auto="matAutcomplete">
-                <mat-option value="option" *ngFor="let persona of ms.getList()">{{persona[0]}}</mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    -->
 
         <mat-form-field class="input">
-            <input type="text" placeholder="Manutentore" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto">
+            <input type="text" placeholder="Manutentore" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
               <mat-option *ngFor="let option of getFilteredList()" [value]="option[0]">
                 {{option[0]}}
@@ -82,12 +66,15 @@
     Validation status:
     <div>- Description: {{MyForm.get('description').valid}}</div>
     <div>- Detail: {{MyForm.get('detail').valid}}</div>
+    <div>- Data: {{MyForm.get('date').valid}}</div>
+    <div>- Ora: {{MyForm.get('time').valid}}</div>
     <div>- Price: {{MyForm.get('price').valid}}</div>
     <div>- Worker: {{MyForm.get('worker').valid}}</div>
     <div></div>
     Data collected:
     <div>- Description: {{DatiForm.description}}</div>
     <div>- Detail: {{DatiForm.detail}}</div>
+    <div>- Data: {{DatiForm.date}}</div>
     <div>- Price: {{DatiForm.price}}</div>
     <div>- Worker: {{DatiForm.worker_id}}</div>
 </div>

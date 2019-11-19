@@ -49,10 +49,10 @@ export class FormComponent implements OnInit {
     this.MyForm = this.builder.group({
       description: ['', (val: any) => { return (((val.value || '').length > 0)? null : {'error': 'La descrizione è necessaria.'}) }],
       detail: [''],
-      date: ['', (val: any) => {return null}],
-      //time: ['', (val: any) => {return null}],
+      date: ['', (val: any) => {return this.validateDatelocal()}],
+      time: ['', (val: any) => {return this.validateDatelocal()}],
       price: ['', (val: any) => {return ((((val.value || '').length > 0) && (val.value != '-'))? null : {'error': 'Il prezzo è necessario.'})}],
-      worker: ['', (val: any) => {return null}]
+      worker:["", [(val:any) => {return this.validateWorker(val.value)}]]
     });
   }
 
@@ -288,4 +288,42 @@ export class FormComponent implements OnInit {
     return aResult;
   }
 
+  validateWorker(sTxt: string){
+    var
+      aItem: any [];
+    for(aItem of this.workerService.getList())
+    {
+      if(sTxt == aItem[0]){
+        this.DatiForm.worker_id = aItem[1];
+        return null;
+      }
+    }    
+    return {'error': 'Manutentore non trovato'}
+  }
+
+  validateDatelocal(){
+    if (this.MyForm)
+    {
+      var
+        valueDatalocal: string = this.MyForm.get('date').value+'T'+this.MyForm.get('time').value,
+        datetoday: any = new Date(),
+        dateinput: any = new Date(valueDatalocal) ;
+
+      if (dateinput >= datetoday){
+        this.DatiForm.date = valueDatalocal;
+        return null;
+
+      } else { 
+          return {
+            'error': "Assegna una data valida!"
+          }    
+      }   
+    }else
+    {
+      console.log('k');
+      return {
+        'error': "Form non pronto"
+      } 
+    }
+  }
 }
