@@ -317,8 +317,8 @@ export class RollingComponent implements OnInit {
    this.selfPos_CurrEdge = iEdge2;
   
    //Also, set the bools
-   this.selfTransition_Top_Ended = (Math.abs(this.selfPos_Prev[1]-this.selfPos_Curr[1]) < (this.getMaxPosY()/100));
-   this.selfTransition_Left_Ended = (Math.abs(this.selfPos_Prev[0]-this.selfPos_Curr[0]) < (this.getMaxPosX()/100));
+   this.selfTransition_Top_Ended = (Math.abs(this.selfPos_Prev[1]-this.selfPos_Curr[1]) < (this.getMaxPosY()/50));
+   this.selfTransition_Left_Ended = (Math.abs(this.selfPos_Prev[0]-this.selfPos_Curr[0]) < (this.getMaxPosX()/50));
 
    if (this.selfTransition_Top_Ended && this.selfTransition_Left_Ended)
    {
