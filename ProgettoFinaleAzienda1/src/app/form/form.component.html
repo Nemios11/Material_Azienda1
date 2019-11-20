@@ -78,8 +78,17 @@
                 <mat-icon matSuffix>face</mat-icon>
             </mat-form-field>
             
-            <div class="note">
+            <div class="note" *ngIf="workerService.iLastPostResponse == -1">
                 I campi contrassegnati con * sono necessari.
+            </div>
+            <div class="note" *ngIf="workerService.iLastPostResponse == 0">
+                Invio dei dati in corso...
+            </div>
+            <div class="note" id="noteSuccess" *ngIf="workerService.iLastPostResponse == 1">
+                Dati inviati correttamente!
+            </div>
+            <div class="note" id="noteFailure" *ngIf="workerService.iLastPostResponse == 2">
+                Invio dei dati fallito.
             </div>
 
             <div class="bottoni">

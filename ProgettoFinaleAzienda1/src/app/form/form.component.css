@@ -91,3 +91,15 @@ mat-form-field{
 mat-progress-bar{
     margin-top: 10px;
 }
+
+#noteSuccess
+{
+    font-weight: bold;
+    color: rgba(0, 150, 0, 1);
+}
+
+#noteFailure
+{
+    font-weight: bold;
+    color: rgba(255, 0, 0, 1);
+}

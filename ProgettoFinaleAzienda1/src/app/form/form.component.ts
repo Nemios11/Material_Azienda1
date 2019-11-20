@@ -93,6 +93,7 @@ export class FormComponent implements OnInit {
   resetFormData()
   {
     this.DatiForm.dettaglio = '';
+    this.workerService.iLastPostResponse = -1;
   }
 
   price_KeyUpPrice(val :any)
