@@ -315,21 +315,12 @@ export class RollingComponent implements OnInit {
    //Save the destination as the future "current" position
    this.selfPos_Curr = [aNewPos[0], aNewPos[1]];
    this.selfPos_CurrEdge = iEdge2;
+  
+   //Also, set the bools
+   this.selfTransition_Top_Ended = (Math.abs(this.selfPos_Prev[1]-this.selfPos_Curr[1]) < (this.getMaxPosY()/100));
+   this.selfTransition_Left_Ended = (Math.abs(this.selfPos_Prev[0]-this.selfPos_Curr[0]) < (this.getMaxPosX()/100));
 
-   //And set the speed
-   iDistance = (((this.selfPos_Prev[0]-this.selfPos_Curr[0])**2)+((this.selfPos_Prev[1]-this.selfPos_Curr[1])**2))**(1/2);
-
-   if (iDistance > 10)
-   {
-     this.selfTransition_Position = Math.round(10*iDistance/150)/10;
-     this.setTransition();
-
-     //Also, set the bools and counts
-     this.selfTransition_Top_Ended = false;
-     this.selfTransition_Left_Ended = false;
-     this.selfCountFails = 0;
-
-   }else
+   if (this.selfTransition_Top_Ended && this.selfTransition_Left_Ended)
    {
      //Destination too close to be worth playing the animation; skip it
      if (this.selfCountFails < 10)
@@ -341,6 +332,16 @@ export class RollingComponent implements OnInit {
       this.selfCountFails = 0;
       this.setRandomPosition();
      }
+   }else
+   {
+     //And set the speed
+     iDistance = (((this.selfPos_Prev[0]-this.selfPos_Curr[0])**2)+((this.selfPos_Prev[1]-this.selfPos_Curr[1])**2))**(1/2);
+     this.selfTransition_Position = Math.round(10*iDistance/150)/10;
+     this.setTransition();
+
+     //Reset the fails count
+     this.selfCountFails = 0;
+
    }
  }
 
@@ -424,21 +425,20 @@ export class RollingComponent implements OnInit {
     //We haven't failed yet
     this.selfCountFails = 0;
 
-    //And set the speed
-    var iDistance = (((this.selfPos_Prev[0]-this.selfPos_Curr[0])**2)+((this.selfPos_Prev[1]-this.selfPos_Curr[1])**2))**(1/2);
+    //Also, set the bools
+    this.selfTransition_Top_Ended = (Math.abs(this.selfPos_Prev[1]-this.selfPos_Curr[1]) < (this.getMaxPosY()/100));
+    this.selfTransition_Left_Ended = (Math.abs(this.selfPos_Prev[0]-this.selfPos_Curr[0]) < (this.getMaxPosX()/100));
 
-    if (iDistance > 10)
-    {
-      this.selfTransition_Position = Math.round(10*iDistance/150)/10;
-      this.setTransition();
-
-      //Also, set the bools
-      this.selfTransition_Top_Ended = false;
-      this.selfTransition_Left_Ended = false;
-    }else
+    if (this.selfTransition_Top_Ended && this.selfTransition_Left_Ended)
     {
       //Destination too close to be worth playing the animation; skip it
       this.setNewPosition();
+    }else
+    {
+      //And set the speed
+      var iDistance = (((this.selfPos_Prev[0]-this.selfPos_Curr[0])**2)+((this.selfPos_Prev[1]-this.selfPos_Curr[1])**2))**(1/2);
+      this.selfTransition_Position = Math.round(10*iDistance/150)/10;
+      this.setTransition();
     }
   }
 
