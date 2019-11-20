@@ -442,4 +442,12 @@ export class RollingComponent implements OnInit {
     }
   }
 
+  onClick(event: any)
+  {
+    this.selfTransition_Position = 0;
+    this.setTransition();
+    this.selfPos_Curr = [event.x-event.offsetX, event.y-event.offsetY];
+    this.setNewPosition();
+  }
+
 }
