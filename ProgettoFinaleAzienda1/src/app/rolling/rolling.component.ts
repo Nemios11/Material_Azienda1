@@ -445,8 +445,11 @@ export class RollingComponent implements OnInit {
   onClick(event: any)
   {
     this.selfTransition_Position = 0;
+    this.selfTransition_Color = 0;
     this.setTransition();
+    this.selfBackColor = [255-this.selfBackColor[0], 255-this.selfBackColor[1], 255-this.selfBackColor[2]];
     this.selfPos_Curr = [event.x-event.offsetX, event.y-event.offsetY];
+    this.setNewColor();
     this.setNewPosition();
   }
 
