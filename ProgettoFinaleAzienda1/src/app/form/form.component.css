@@ -103,3 +103,10 @@ mat-progress-bar{
     font-weight: bold;
     color: rgba(255, 0, 0, 1);
 }
+
+.avatarImg
+{
+    position: relative;
+    top: 10px;
+    border-radius: 30px;
+}

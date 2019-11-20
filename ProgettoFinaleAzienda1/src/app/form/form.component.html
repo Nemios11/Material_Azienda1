@@ -70,7 +70,7 @@
                 <input type="text" placeholder="Manutentore/trice*" aria-label="Number" matInput formControlName="worker" [matAutocomplete]="auto" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" [readonly]="workerService.iLastPostResponse == 0">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let option of getFilteredList()" [value]="option[0]">
-                    {{option[0]}}
+                    <img src="{{option[2]}}" alt="avatar" height="30px" width="30px" class="avatarImg"> {{option[0]}}
                 </mat-option>
                 </mat-autocomplete>
 
