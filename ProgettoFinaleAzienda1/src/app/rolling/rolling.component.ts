@@ -26,6 +26,8 @@ export class RollingComponent implements OnInit {
   selfTransition_Position: number = 2.0;
   selfTransitionString: string = 'all 0.0s linear 0s';
 
+  selfClicked: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -442,15 +444,60 @@ export class RollingComponent implements OnInit {
     }
   }
 
-  onClick(event: any)
+  onMouseUp()
   {
-    this.selfTransition_Position = 0;
-    this.selfTransition_Color = 0;
-    this.setTransition();
-    this.selfBackColor = [255-this.selfBackColor[0], 255-this.selfBackColor[1], 255-this.selfBackColor[2]];
+    if (this.selfClicked)
+    {
+      this.selfClicked = false;
+      this.setNewPosition();
+    }
+  }
+
+  onMouseDown(event: any)
+  {
+    if (!this.selfClicked)
+    {
+      //Stop the transition
+      this.selfTransition_Position = 0;
+      this.setTransition();
+
+      //Get where we're suppsoed to be bouncing off to now
+      var
+        iX: number = event.offsetX-(this.selfWidth/2),
+        iY: number = (this.selfHeight/2)-event.offsetY;
+
+      if (iY < iX)
+      {
+        //bottom or right?
+        if (iY < -iX)
+        {
+          //bottom
+          this.selfPos_CurrEdge = 2;
+        }else
+        {
+          //right
+          this.selfPos_CurrEdge = 1;
+        }
+      }else
+      {
+        //top or left?
+        if (iY < -iX)
+        {
+          //left
+          this.selfPos_CurrEdge = 3;
+        }else
+        {
+          //top
+          this.selfPos_CurrEdge = 0;
+        }
+      }
+    }
+
+    //Set the actual position as the current one
     this.selfPos_Curr = [event.x-event.offsetX, event.y-event.offsetY];
-    this.setNewColor();
-    this.setNewPosition();
+
+    //Remember this!
+    this.selfClicked = true;
   }
 
 }

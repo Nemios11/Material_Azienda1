@@ -1,1 +1,1 @@
-<div id="stone" [style.left]="getPos(selfPos_Curr[0])" [style.top]="getPos(selfPos_Curr[1])" [style.backgroundColor]="getColor()" [style.transition]="selfTransitionString" (transitionend)="onTransitionEnd($event)" (click)="onClick($event)"></div>
+<div id="stone" [style.left]="getPos(selfPos_Curr[0])" [style.top]="getPos(selfPos_Curr[1])" [style.backgroundColor]="getColor()" [style.transition]="selfTransitionString" (transitionend)="onTransitionEnd($event)" (window:mouseup)="onMouseUp()" (mousedown)="onMouseDown($event)"></div>
